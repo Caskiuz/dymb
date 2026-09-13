@@ -71,8 +71,8 @@ html.custom-cursor, html.custom-cursor * { cursor: none !important; }
   pointer-events: none;
   will-change: transform;
 }
-#cursor-heart { z-index: 210; }
-#cursor-ring { z-index: 209; }
+#cursor-heart { z-index: 500; }
+#cursor-ring { z-index: 499; }
 
 .cursor-ring-inner {
   display: block;
@@ -110,7 +110,7 @@ html.custom-cursor, html.custom-cursor * { cursor: none !important; }
   66%      { border-color: rgba(184,166,255,.85); border-top-color: transparent; border-right-color: rgba(255,143,179,.45); box-shadow: 0 0 12px rgba(184,166,255,.4), inset 0 0 12px rgba(184,166,255,.15); }
 }
 .cursor-ripple {
-  position: fixed; z-index: 208;
+  position: fixed; z-index: 497;
   width: 16px; height: 16px; margin: -8px 0 0 -8px;
   border-radius: 50%;
   border: 2px solid rgba(255,143,179,.9);
@@ -120,7 +120,7 @@ html.custom-cursor, html.custom-cursor * { cursor: none !important; }
 @keyframes cursor-ripple { to { transform: scale(4.2); opacity: 0; } }
 
 .sparkle {
-  position: fixed; z-index: 201;
+  position: fixed; z-index: 498;
   pointer-events: none;
   font-size: 14px;
   animation: sparkle-float 900ms ease-out forwards;
