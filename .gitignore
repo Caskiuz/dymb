@@ -1,0 +1,11 @@
+# ── PRIVADO: nunca subir esto ──
+Dailubis/
+images/
+
+# basura del sistema / herramientas
+.zcode/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db

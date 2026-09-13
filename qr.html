@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu invitación con QR 💜</title>
+  <style>
+    :root { --rose:#ff8fb3; --gold:#ffd9a0; --lav:#b8a6ff; --ink:#2a1e3f; }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 26px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(130% 100% at 50% 0%, #241547 0%, #0d0722 60%, #05030f 100%);
+      color: #fff6ec;
+    }
+    .card {
+      width: min(480px, 94vw);
+      text-align: center;
+      padding: 40px 30px 34px;
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.5);
+    }
+    h1 {
+      font-family: Georgia, serif; font-style: italic; font-weight: 600;
+      font-size: clamp(26px, 6vw, 34px);
+      background: linear-gradient(120deg, #fff, var(--rose) 60%, var(--gold));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .sub { opacity: .8; font-size: 14.5px; line-height: 1.6; margin-bottom: 22px; }
+    #qr-box {
+      display: inline-block; padding: 16px; border-radius: 18px; background: #fff;
+      box-shadow: 0 14px 40px rgba(255,143,179,.35); margin-bottom: 18px;
+    }
+    #qr-box svg { display: block; width: min(230px, 60vw); height: auto; }
+    .names { font-family: Georgia, serif; font-size: 22px; margin: 6px 0 2px; }
+    .foot { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; opacity: .65; }
+    .tools { margin-top: 22px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    input {
+      width: 100%; max-width: 360px; padding: 12px 16px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08);
+      color: #fff; font-size: 14px; margin-bottom: 14px; text-align: center;
+    }
+    button {
+      border: none; border-radius: 999px; padding: 12px 24px; cursor: pointer;
+      font-weight: 700; font-size: 14px; color: #fff;
+      background: linear-gradient(135deg, #ff5d8f, #ff8fb3 55%, #ffd9a0);
+      box-shadow: 0 10px 26px rgba(255,93,143,.4);
+    }
+    .hint { font-size: 12.5px; opacity: .6; margin-top: 16px; line-height: 1.6; }
+    @media print {
+      body { background: #fff; color: #2a1e3f; }
+      .card { border: 2px solid #e8c9d4; box-shadow: none; background: #fff; }
+      .tools, .hint, input { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Escanea y descubre…</h1>
+    <p class="sub">Hay una pregunta esperándote<br>al otro lado de este código 💘</p>
+    <div id="qr-box"></div>
+    <div class="names" id="names"></div>
+    <div class="foot" id="foot"></div>
+
+    <div class="tools">
+      <button onclick="window.print()">🖨️ Imprimir / guardar PDF</button>
+    </div>
+
+    <p class="hint">
+      ¿Se abrió en tu computadora sin estar publicado? Pega aquí la URL de tu sitio
+      (ej: <b>https://tu-sitio.vercel.app</b>) y presiona Enter para regenerar el QR.
+    </p>
+    <input id="url-input" placeholder="https://tu-sitio.vercel.app" autocomplete="off">
+  </div>
+
+  <script src="config.js"></script>
+  <script src="vendor/qrcode/qrcode.min.js"></script>
+  <script>
+    function renderQR(url) {
+      if (!url || !/^https?:\/\//i.test(url)) return;
+      const qr = qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      document.getElementById('qr-box').innerHTML = qr.createSvgTag({ cellSize: 5, margin: 1, scalable: true });
+    }
+
+    document.getElementById('names').textContent =
+      (CONFIG.herName || '') + ' + ' + (CONFIG.yourName || '');
+    document.getElementById('foot').textContent = 'para: ' + (CONFIG.herNick || CONFIG.herName || 'ti');
+
+    // URL: ?url=… , o la URL publicada si qr.html vive junto a index.html
+    const params = new URLSearchParams(location.search);
+    let target = params.get('url');
+    if (!target && !/^file:/i.test(location.protocol)) {
+      target = location.origin + location.pathname.replace(/qr\.html$/, '');
+    }
+    const input = document.getElementById('url-input');
+    if (target) input.value = target;
+    renderQR(target);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        let u = input.value.trim();
+        if (u && !/^https?:\/\//i.test(u)) u = 'https://' + u;
+        renderQR(u);
+      }
+    });
+  </script>
+</body>
+</html>
