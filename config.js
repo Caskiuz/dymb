@@ -70,10 +70,10 @@ window.CONFIG = {
       title: "El día que por fin me respondiste",
       text:  "Después de días insistiendo por Facebook, dijiste que sí. Desayunamos pasteles con jugos naturales, caminamos, compramos ropa de gym y terminamos entrenando. El mejor sí de mi vida. 💜",
       chat: [
-        { from: "yo",   text: "Hola… soy Ricardo, el que no deja de escribirte 😅🤞" },
-        { from: "ella", text: "Jajaja ok… vayamos a desayunar entonces" },
-        { from: "ella", text: "¿Le vi cara de muerta de hambre? 🤨" },
-        { from: "yo",   text: "No… pero es una excusa perfecta para verte 😉" }
+        { from: "yo",   name: "Ricardo",  text: "Hola… soy Ricardo, el que no deja de escribirte 😅🤞" },
+        { from: "ella", name: "Dailubis", text: "Jajaja ok… hagamos algo vayamos a desayunar entonces" },
+        { from: "ella", name: "Dailubis", text: "me viste cara de muerta de hambre? 🤨" },
+        { from: "yo",   name: "Ricardo",  text: "No… pero es una excusa perfecta para verte y conocernos 😉" }
       ]
     },
     {

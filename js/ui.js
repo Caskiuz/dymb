@@ -80,9 +80,12 @@ const UI = {
       if (m.photo) {
         media = `<div class="m-photo"><img loading="lazy" alt="${m.title}" src="${UI.photoSrc(m.photo)}"></div>`;
       } else if (m.chat) {
-        const bubbles = m.chat.map(b =>
-          `<div class="chat-row ${b.from === 'yo' ? 'me' : 'her'}"><div class="chat-bubble">${b.text}</div></div>`
-        ).join('');
+        const bubbles = m.chat.map(b => {
+          const nombre = b.name || (b.from === 'yo' ? CONFIG.yourName : CONFIG.herName);
+          return `<div class="chat-row ${b.from === 'yo' ? 'me' : 'her'}">
+            <div class="chat-bubble"><span class="chat-name">${nombre}</span>${b.text}</div>
+          </div>`;
+        }).join('');
         media = `<div class="m-chat">${bubbles}<div class="chat-date">Facebook · el día que dijo que sí 💌</div></div>`;
       }
 
