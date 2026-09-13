@@ -225,7 +225,7 @@ window.CONFIG = {
      ──────────────────────────────────────────────── */
   finale: {
     title:    "¡Me haces la persona más feliz del universo! 🎉",
-    text:     "Desde hoy, oficialmente somos nosotros. Y empiezo cumpliendo:",
+    text:     "Desde hoy, {FECHA}, oficialmente somos nosotros. Y empiezo cumpliendo:",
     vowsTitle: "Mis votos para ti, Gorda 💜",
     vows: [                                                                  // [EDITA AQUÍ] tus votos
       "Prometo hacerte feliz cada día, hasta en los días grises.",

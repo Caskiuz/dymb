@@ -81,6 +81,7 @@ function showFinale() {
   // sello con fecha y hora exactas del "Sí"
   const ahora = new Date();
   const sello = ahora.toLocaleString('es', { dateStyle: 'full', timeStyle: 'short' });
+  $('#finale-text').textContent = CONFIG.finale.text.replace('{FECHA}', sello);
   $('#cert-stamp').textContent = `${CONFIG.finale.sealedLabel} ${sello}`;
 
   Music.probe('assets/music/voice.mp3').then(ok => {
