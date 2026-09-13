@@ -76,8 +76,14 @@ window.CONFIG = {
       ]
     },
     {
+      date:  "21 · mayo · 2023",
+      title: "Nuestra primera foto juntos",
+      text:  "A un solo día de aquel sí, ya éramos inseparables. Esta es la primera foto que nos tomamos juntos… y sigue siendo mi tesoro más valioso. 📸💜",
+      photo: "juntos-20260913-03"
+    },
+    {
       date:  "20 · oct · 2024",
-      title: "La primera foto que guardé de nosotros",
+      title: "La piscina y tu sonrisa",
       text:  "Ese día descubrí algo: yo miraba la piscina, pero mis ojos solo te encontraban a ti. ✨",
       photo: "juntos-20241020-01"
     },
