@@ -72,7 +72,8 @@ window.CONFIG = {
       chat: [
         { from: "yo",   text: "Hola… soy Ricardo, el que no deja de escribirte 😅🤞" },
         { from: "ella", text: "Jajaja ok… vayamos a desayunar entonces" },
-        { from: "yo",   text: "¿En serio? 🥰 Pastel y jugo natural, yo invito" }
+        { from: "ella", text: "¿Le vi cara de muerta de hambre? 🤨" },
+        { from: "yo",   text: "No… pero es una excusa perfecta para verte 😉" }
       ]
     },
     {
