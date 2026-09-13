@@ -71,7 +71,8 @@ window.CONFIG = {
       text:  "Después de días insistiendo por Facebook, dijiste que sí. Desayunamos pasteles con jugos naturales, caminamos, compramos ropa de gym y terminamos entrenando. El mejor sí de mi vida. 💜",
       chat: [
         { from: "yo",   name: "Ricardo",  text: "Hola… soy Ricardo, el que no deja de escribirte 😅🤞" },
-        { from: "ella", name: "Dailubis", text: "Jajaja ok… hagamos algo vayamos a desayunar entonces" },
+        { from: "ella", name: "Dailubis", text: "Jajaja hola! Me levanté temprano, salí a trotar, vengo llegando a casa 🏃‍♀️" },
+        { from: "yo",   name: "Ricardo",  text: "Perfecto… entonces vamos a desayunar. Pasteles con jugos naturales, yo invito 😋" },
         { from: "ella", name: "Dailubis", text: "me viste cara de muerta de hambre? 🤨" },
         { from: "yo",   name: "Ricardo",  text: "No… pero es una excusa perfecta para verte y conocernos 😉" }
       ]
