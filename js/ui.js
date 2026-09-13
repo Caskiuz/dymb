@@ -384,32 +384,76 @@ const UI = {
     });
   },
 
-  /* ── cursor mágico ─────────────────────────────── */
+  /* ── cursor mágico neón (siempre en movimiento) ── */
   initCursor() {
     if (!matchMedia('(pointer: fine)').matches) return;
-    const glow = document.createElement('div');
-    glow.id = 'cursor-glow';
-    document.body.appendChild(glow);
-    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y;
-    const chars = ['✨', '💜', '💫', '✦'];
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    document.documentElement.classList.add('custom-cursor');
+
+    const heart = document.createElement('div');
+    heart.id = 'cursor-heart';
+    heart.innerHTML = '<span class="cursor-heart-inner">💗</span>';
+    const ring = document.createElement('div');
+    ring.id = 'cursor-ring';
+    ring.innerHTML = '<span class="cursor-ring-inner"></span>';
+    document.body.append(ring, heart);
+
+    let x = innerWidth / 2, y = innerHeight / 2;   // corazón (sigue rápido)
+    let rx = x, ry = y;                            // anillo (va rezagado)
+    let tx = x, ty = y;
+    let lastMove = 0;
+
     addEventListener('mousemove', e => {
       tx = e.clientX; ty = e.clientY;
-      if (Math.random() < 0.3) {
-        const s = document.createElement('div');
-        s.className = 'sparkle';
-        s.textContent = chars[(Math.random() * chars.length) | 0];
-        s.style.left = e.clientX + 'px';
-        s.style.top = e.clientY + 'px';
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 950);
+      const now = performance.now();
+      if (now - lastMove > 140) {
+        lastMove = now;
+        UI.spawnSparkle(e.clientX, e.clientY);
       }
     }, { passive: true });
+
+    // siempre vivo: chispas solas aunque no se mueva el mouse
+    setInterval(() => {
+      if (document.hidden) return;
+      UI.spawnSparkle(
+        x + (Math.random() - 0.5) * 30,
+        y + (Math.random() - 0.5) * 30,
+        true
+      );
+    }, 620);
+
+    // onda neón al hacer clic
+    addEventListener('pointerdown', e => {
+      const r = document.createElement('div');
+      r.className = 'cursor-ripple';
+      r.style.left = e.clientX + 'px';
+      r.style.top = e.clientY + 'px';
+      document.body.appendChild(r);
+      setTimeout(() => r.remove(), 600);
+    });
+
     (function loop() {
-      x += (tx - x) * 0.22;
-      y += (ty - y) * 0.22;
-      glow.style.transform = `translate(${x}px,${y}px)`;
+      x += (tx - x) * 0.35;
+      y += (ty - y) * 0.35;
+      rx += (x - rx) * 0.12;
+      ry += (y - ry) * 0.12;
+      heart.style.transform = `translate3d(${x}px,${y}px,0)`;
+      ring.style.transform = `translate3d(${rx}px,${ry}px,0)`;
       requestAnimationFrame(loop);
     })();
+  },
+
+  spawnSparkle(px, py, drift = false) {
+    const chars = ['✨', '💜', '💫', '✦', '🌟'];
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.textContent = chars[(Math.random() * chars.length) | 0];
+    s.style.left = px + 'px';
+    s.style.top = py + 'px';
+    if (drift) s.style.fontSize = (9 + Math.random() * 7) + 'px';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 950);
   },
 
   /* ── tilt 3D de las tarjetas ───────────────────── */
